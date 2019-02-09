@@ -25,8 +25,15 @@ userRouter.route('/')
     }))
 
 userRouter.route('/:address')
-    .get( jwt({secret: process.env.SECRET}), wrapAsync(async (req, res) => {console.log("hit");
+    .get( jwt({secret: process.env.SECRET}), wrapAsync(async (req, res) => {
         return await req.db.collection('Users').findOne({ address: req.params.address.toLowerCase() })
+    }))
+    .put( jwt({secret: process.env.SECRET}), wrapAsync(async (req, res) => {
+        const user = new UserType(req.body);
+        await req.db.collection('Users').findOneAndUpdate(
+            { 'address': req.params.address },
+            { $set: user },
+        );
     }))
 
 export default userRouter;
