@@ -2,6 +2,9 @@
     "name": "h1ve-api",
     "version": "0.1.0",
     "description": "h1ve API",
+    "engines": {
+        "node": "11.9.0"
+    },
     "main": "index.js",
     "scripts": {
         "lint": "eslint src/*.js --ignore-path .gitignore --fix",
